@@ -4,7 +4,7 @@
 
 import requests
 import logging
-from flyff.exceptions import FlyffException
+from pyff.exceptions import FlyffException
 
 logger = logging.getLogger(__name__)
 

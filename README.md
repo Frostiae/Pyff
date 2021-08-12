@@ -7,7 +7,7 @@ Contributions and pull requests are welcome!
 ### Quick Start
 
 ```python
-from flyff.flyff import Flyff
+from pyff.flyff import Flyff
 
 flyff = Flyff()
 item_ids = [1, 3, 5, 52, 55, 61, 81]
