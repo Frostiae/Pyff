@@ -1,4 +1,4 @@
-from flyff import Flyff
+from flyff.flyff import Flyff
 import unittest
 
 

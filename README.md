@@ -5,8 +5,9 @@ As time goes on and the API gets more populated, this library will hopefully fol
 
 Contributions and pull requests are welcome!
 ### Quick Start
+
 ```python
-from flyff import Flyff
+from flyff.flyff import Flyff
 
 flyff = Flyff()
 item_ids = [1, 3, 5, 52, 55, 61, 81]
