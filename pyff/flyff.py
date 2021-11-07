@@ -35,7 +35,7 @@ class Flyff(object):
         self.prefix = "https://flyff-api.sniegu.fr/"
         self.version = self.get_version()
 
-    def _get(self, url: str, headers=None):
+    def _get(self, url: str, headers=None, method=None):
         if not url.startswith("http"):
             url = self.prefix + url
 
@@ -44,8 +44,13 @@ class Flyff(object):
         else:
             headers = {"content-type": headers}
 
+        if not method:
+            method = "GET"
+        else:
+            method = method
+
         try:
-            response = requests.request("GET", url, headers=headers)
+            response = requests.request(method, url, headers=headers)
             results = response.json()
         except requests.exceptions.HTTPError as http_error:
             response = http_error.response
@@ -98,7 +103,27 @@ class Flyff(object):
         :return: a list of individual items corresponding to the given IDs
         """
         ids = normalize_list(ids)
-        return self._get("item/" + ids)
+        limit = 350
+        res = []
+
+        if len(ids) > limit:
+            strings = []
+            s = ids.split(",")
+            for n in range(0, len(s), 100):
+                joined = ",".join(s[n:n+100])
+                strings.append(joined)
+
+            for string in strings:
+                res += self._get("item/" + string)
+        else:
+            res = self._get("item/" + ids)
+
+        return res
+
+    def get_all_single_items(self):
+        ids = self.get_all_items()
+        ids = normalize_list(ids)
+        return self._get("item/" + ids, method="POST")
 
     def get_all_classes(self):
         """
@@ -249,7 +274,7 @@ class Flyff(object):
         :param npc_id: The npc ID
         :return: An individual NPC
         """
-        return self._get("skill/" + str(npc_id))
+        return self._get("npc/" + str(npc_id))
 
     def get_npcs_by_ids(self, ids):
         """
@@ -260,3 +285,111 @@ class Flyff(object):
         """
         ids = normalize_list(ids)
         return self._get("npc/" + ids)
+
+    def get_all_karma_levels(self):
+        """
+        Get a list of all Karma levels
+
+        :return: a list of all Karma levels
+        """
+        return self._get("karma")
+
+    def get_karma_by_id(self, karma_id):
+        """
+        Get an individual Karma level by the given id
+
+        :param karma_id: The karma ID
+        :return: An individual Karma level
+        """
+        return self._get("karma/" + str(karma_id))
+
+    def get_karma_levels_by_ids(self, ids):
+        """
+        Get a list of Karma levels corresponding to the given IDs
+
+        :param ids: ids: A list (or comma separated string) of Karma IDs
+        :return: A list of Karma levels
+        """
+        ids = normalize_list(ids)
+        return self._get("karma/" + ids)
+
+    def get_all_partyskill(self):
+        """
+        Get a list of all available party skill IDs
+
+        :return: a list of all available party skill IDs
+        """
+        return self._get("partyskill")
+
+    def get_partyskill_by_id(self, partyskill_id):
+        """
+        Get an individual party skill by the given ID
+
+        :param partyskill_id: The party skill ID
+        :return: An individual party skill
+        """
+        return self._get("partyskill/" + str(partyskill_id))
+
+    def get_partyskills_by_ids(self, ids):
+        """
+        Get a list of party skills corresponding to the given IDs
+
+        :param ids: ids: A list (or comma separated string) of party skill IDs
+        :return: A list of party skills
+        """
+        ids = normalize_list(ids)
+        return self._get("partyskill/" + ids)
+
+    def get_all_quests(self):
+        """
+        Get a list of all available quest IDs
+
+        :return: a list of all available quest IDs
+        """
+        return self._get("quest")
+
+    def get_quest_by_id(self, quest_id):
+        """
+        Get an individual quest by the given ID
+
+        :param quest_id: the quest ID
+        :return: An individual quest
+        """
+        return self._get("quest/" + str(quest_id))
+
+    def get_quests_by_ids(self, ids):
+        """
+        Get a list of quests corresponding to the given IDs
+
+        :param ids: ids: A list (or comma separated string) of quest IDs
+        :return: A list of quests
+        """
+        ids = normalize_list(ids)
+        return self._get("quest/" + ids)
+
+    def get_all_achievements(self):
+        """
+        Get a list of all available achievement IDs
+
+        :return: a list of all available achievement IDs
+        """
+        return self._get("achievement")
+
+    def get_achievement_by_id(self, achievement_id):
+        """
+        Get an individual achievement by the given ID
+
+        :param achievement_id: The achievement ID
+        :return: An individual achievement
+        """
+        return self._get("achievement/" + str(achievement_id))
+
+    def get_achievements_by_ids(self, ids):
+        """
+        Get a list of achievements corresponding to the given IDs
+
+        :param ids: ids: A list (or comma separated string) of achievment IDs
+        :return: A list of achievements
+        """
+        ids = normalize_list(ids)
+        return self._get("achievement/" + ids)
