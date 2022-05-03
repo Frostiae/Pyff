@@ -4,7 +4,7 @@ import unittest
 
 class IntegrationTestFlyff(unittest.TestCase):
     """
-    A test suite for the Flyff Project M data API
+    A test suite for the Flyff Universe data API
 
     Currently only testing on the item methods because the implementation
     for the other parts of the API (worlds, classes, monsters, skills, NPCs)

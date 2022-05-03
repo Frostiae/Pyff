@@ -393,3 +393,10 @@ class Flyff(object):
         """
         ids = normalize_list(ids)
         return self._get("achievement/" + ids)
+
+    def get_upgrade_bonus(self):
+        """
+        Get a list of all the upgrade bonuses
+        :return: a list of upgrade bonuses
+        """
+        return self._get("upgradelevelbonus")

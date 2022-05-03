@@ -1,6 +1,6 @@
 # Pyff
 
-Pyff is a very small python wrapper for the [Flyff Project M API](https://flyff-api.sniegu.fr/).
+Pyff is a very small python wrapper for the [Flyff Universe API](https://flyff-api.sniegu.fr/).
 As time goes on and the API gets more populated, this library will hopefully follow. 
 
 Contributions and pull requests are welcome!

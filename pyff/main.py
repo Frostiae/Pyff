@@ -60,6 +60,18 @@ def get_karma():
         json.dump(karma, f, indent=3)
 
 
+def get_upgrade_bonus():
+    upgrade_bonus = flyff.get_upgrade_bonus()
+    with open('upgradeBonus.json', 'w+') as f:
+        json.dump(upgrade_bonus, f, indent=3)
+
+
 if __name__ == '__main__':
+    print("Working...")
     print("Game version: " + str(flyff.get_version()))
+    # get_items()
+    # get_monsters()
+    # get_skills()
     # get_jobs()
+    # get_sets()
+    print("Done!")
