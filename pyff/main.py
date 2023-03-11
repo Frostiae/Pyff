@@ -53,11 +53,16 @@ def get_quests():
         json.dump(quests, f, indent=3)
 
 
-def get_karma():
-    s = flyff.get_karma_levels_by_ids(flyff.get_all_karma_levels())
-    karma = sorted(s, key=lambda item: item['id'])
-    with open('karma.json', 'w+') as f:
-        json.dump(karma, f, indent=3)
+def get_pk():
+    s = flyff.get_pk_info()
+    with open('pk.json', 'w+') as f:
+        json.dump(s, f, indent=3)
+
+
+def get_dungeons():
+    s = flyff.get_dungeons()
+    with open('dungeons.json', 'w+') as f:
+        json.dump(s, f, indent=3)
 
 
 def get_upgrade_bonus():
@@ -66,12 +71,22 @@ def get_upgrade_bonus():
         json.dump(upgrade_bonus, f, indent=3)
 
 
+def get_npcs():
+    s = flyff.get_npcs_by_ids(flyff.get_all_npcs())
+    npcs = sorted(s, key=lambda item: item['id'])
+    with open('npcs.json', 'w+') as f:
+        json.dump(npcs, f, indent=3)
+
+
+def get_skill_awakes():
+    s = flyff.get_skill_awakes()
+    with open('skillawakes.json', 'w+') as f:
+        json.dump(s, f, indent=3)
+
+
 if __name__ == '__main__':
     print("Working...")
     print("Game version: " + str(flyff.get_version()))
-    # get_items()
-    # get_monsters()
-    # get_skills()
-    # get_jobs()
-    # get_sets()
+    # get_pk()
+    # get_dungeons()
     print("Done!")

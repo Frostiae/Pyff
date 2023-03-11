@@ -32,7 +32,7 @@ class Flyff(object):
         """
         Creates an instance of the Flyff Project M API wrapper
         """
-        self.prefix = "https://flyff-api.sniegu.fr/"
+        self.prefix = "https://api.flyff.com/"
         self.version = self.get_version()
 
     def _get(self, url: str, headers=None, method=None):
@@ -286,32 +286,13 @@ class Flyff(object):
         ids = normalize_list(ids)
         return self._get("npc/" + ids)
 
-    def get_all_karma_levels(self):
+    def get_pk_info(self):
         """
-        Get a list of all Karma levels
+        Get an object of all PK information
 
-        :return: a list of all Karma levels
+        :return: an object of all PK information
         """
-        return self._get("karma")
-
-    def get_karma_by_id(self, karma_id):
-        """
-        Get an individual Karma level by the given id
-
-        :param karma_id: The karma ID
-        :return: An individual Karma level
-        """
-        return self._get("karma/" + str(karma_id))
-
-    def get_karma_levels_by_ids(self, ids):
-        """
-        Get a list of Karma levels corresponding to the given IDs
-
-        :param ids: ids: A list (or comma separated string) of Karma IDs
-        :return: A list of Karma levels
-        """
-        ids = normalize_list(ids)
-        return self._get("karma/" + ids)
+        return self._get("pk")
 
     def get_all_partyskill(self):
         """
@@ -400,3 +381,24 @@ class Flyff(object):
         :return: a list of upgrade bonuses
         """
         return self._get("upgradelevelbonus")
+
+    def get_skill_awakes(self):
+        """
+        Get a list of all the skill awakes
+        :return: a list of all skill awakes
+        """
+        return self._get("skillawake")
+
+    def get_pets(self):
+        """
+        Get a list of all the raised pets
+        :return: a list of all raised pets
+        """
+        return self._get("raisedpet")
+
+    def get_dungeons(self):
+        """
+        Get list of all dungeons
+        :return: a list of all dungeons
+        """
+        return self._get("dungeon")
